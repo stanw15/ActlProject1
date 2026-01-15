@@ -1,0 +1,1 @@
+all_data <- read.csv("KaggleData.csv")
