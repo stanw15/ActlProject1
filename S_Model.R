@@ -125,3 +125,15 @@ for (i in 1:k) {
 
 # View average performance across all folds
 # mean(fold_accuracies)
+
+#----------------------------------Model v1
+final_median_fare <- median(train_val_set$Fare, na.rm = TRUE)
+
+train_val_final <- train_val_set %>%
+  mutate(Fare = if_else(Fare == 0, final_median_fare, Fare),
+         LogFare = log(Fare)) # generally add +1 for 0 value
+
+predictor_vars_list_definitive <- c("Pclass", "Sex", "AgeGroup", "SibSp")
+formula_definitive <- as.formula(paste("Survived ~", paste(predictor_vars_list_definitive, collapse = " + ")))
+model_definitive <- glm(formula_definitive, data = train_val_final, family = "binomial")
+summary(model_definitive)
