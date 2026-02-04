@@ -60,7 +60,6 @@ test_set_definitive <- test_set_base %>%
 
 
 # Model S ----------------------------------------------------final_median_fare <- median(train_val_set$Fare, na.rm = TRUE)
-
 predictor_vars_list_definitive <- c("Pclass", "Sex", "AgeGroup", "SibSp")
 formula_definitive <- as.formula(paste("Survived ~", paste(predictor_vars_list_definitive, collapse = " + ")))
 model_definitive <- glm(formula_definitive, data = train_val_final, family = "binomial")
